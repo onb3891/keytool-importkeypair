@@ -126,7 +126,7 @@ fi
 openssl pkcs8 -inform DER -nocrypt -in "${pk8}" -out "${key}"
 
 # Bundle CERT and KEY
-openssl pkcs12 -export -in "${cert}" -inkey "${key}" -out "${p12}" -password pass:"${passphrase}" -name "${alias}"
+openssl pkcs12 --certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -macalg sha1 -export -in "${cert}" -inkey "${key}" -out "${p12}" -password pass:"${passphrase}" -name "${alias}"
 
 # Print cert
 echo -n "Importing \"${alias}\" with "
